@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require_relative '../lib/moto_load'
 
-test 'it requires the file based on the constant, Foo -> foo.rb' do
+test 'if requires the file based on the constant, Foo -> foo.rb' do
   assert Foo.class == Module
 end
 
