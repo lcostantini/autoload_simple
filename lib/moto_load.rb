@@ -1,7 +1,6 @@
 def Object.const_missing(name)
-  directory = MotoLoad.path || "./lib/"
   begin
-    require File.join(directory, name.downcase.to_s)
+    require File.join(MotoLoad.directory, name.downcase.to_s)
   rescue LoadError
     raise NameError
   end
@@ -13,7 +12,8 @@ class MotoLoad
     @path = path
   end
   
-  def self.path
-    @path
+  def self.directory
+    directory = @path || "./lib/"
   end
+  
 end
