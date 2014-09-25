@@ -1,14 +1,11 @@
 def Object.const_missing(name)
-  dc_name = name.downcase.to_s
-  dir = MotoLoad.path || "../lib/"
-  file = File.expand_path("../#{dir}/#{dc_name}.rb", __FILE__)
+  directory = MotoLoad.path || "./lib/"
   begin
-    require file
+    require File.join(directory, name.downcase.to_s)
   rescue LoadError
     raise NameError
   end
-  inherit_class = const_get(name)
-  return inherit_class
+  const_get(name)
 end
 
 class MotoLoad

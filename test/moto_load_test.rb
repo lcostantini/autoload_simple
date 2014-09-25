@@ -16,6 +16,6 @@ test 'if the const is not found it still raising NameError' do
 end
 
 test 'Lib path is configurable' do
-  MotoLoad.path = "../test/fixtures/custom_path/"
+  MotoLoad.path = "./test/fixtures/custom_path/"
   assert InsideCustomPath.new.class == InsideCustomPath 
 end
