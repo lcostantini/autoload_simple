@@ -1,33 +1,22 @@
 def Object.const_missing(name)
-  path = MotoLoad.new_path
-
-  if path.nil?
-    dc_name = name.downcase
-    file = "./lib/#{dc_name}.rb"
-
-    begin
-      require file
-    rescue LoadError
-      raise NameError
-    end
-
-  else
-    directory = File.expand_path("../#{path}", __FILE__)
-    Dir["#{directory}/*.rb"].each {|file| require file }
+  dc_name = name.downcase.to_s
+  dir = MotoLoad.path || "../lib/"
+  file = File.expand_path("../#{dir}/#{dc_name}.rb", __FILE__)
+  begin
+    require file
+  rescue LoadError
+    raise NameError
   end
-
   inherit_class = const_get(name)
   return inherit_class
 end
 
 class MotoLoad
-  @@new_path = nil
-
   def self.path=(path)
-    @@new_path = path
+    @path = path
   end
   
-  def self.new_path
-    @@new_path
+  def self.path
+    @path
   end
 end
